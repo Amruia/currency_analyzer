@@ -1,40 +1,40 @@
-image: python:3.10 # Nebo jiná verze Pythonu, kterou preferujete
-
-
 stages:
   - test
 
 variables:
+  # Cache pro pip balíčky
   PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
 
 cache:
+  # Cesty ke cache (pip a virtuální prostředí)
   paths:
     - .cache/pip
     - venv/
 
 before_script:
-  - python -V               # Vypíše verzi Pythonu
-  - pip install virtualenv
-  - virtualenv venv
+  # Použij 'python3' místo 'python'
+  - python3 -V
+  # Použij vestavěný modul 'venv' místo instalace 'virtualenv'
+  - python3 -m venv venv
+  # Aktivuj virtuální prostředí
   - source venv/bin/activate
-  - pip install -r requirements.txt
+  # Upgraduj pip uvnitř venv (doporučeno)
+  - python3 -m pip install --upgrade pip
+  # Instaluj závislosti pomocí pip z venv
+  - python3 -m pip install -r requirements.txt
 
 test_job:
-
   stage: test
   script:
-    - python --version
-    - pip install -r requirements.txt
     - echo "Spouštím testy..."
-    - pytest tests/ # Spustí všechny testy v adresáři tests
+    # Spusť pytest pomocí python3 z aktivního venv
+    - python3 -m pytest tests/
+    # Pokud chceš JUnit reporty (vyžaduje pytest-junit v requirements.txt):
+    # - python3 -m pytest tests/ --junitxml=report.xml
     - echo "Testy dokončeny."
   artifacts:
-    when: always # Uloží reporty i v případě chyby
-    reports:
-      junit: report.xml # Pokud chcete JUnit report pro GitLab UI (vyžaduje pytest-junit)
-  # Pokud chcete JUnit report, přidejte do requirements.txt: pytest-junit
-  # a upravte script:
-  # script:
-  #   - echo "Spouštím testy..."
-  #   - pytest tests/ --junitxml=report.xml
-  #   - echo "Testy dokončeny."
+    # Ulož artefakty vždy (i když job selže před jejich vytvořením)
+    when: always
+    # Sekce reports je relevantní jen pokud generuješ JUnit XML report
+    # reports:
+    #   junit: report.xml
