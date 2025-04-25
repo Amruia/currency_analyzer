@@ -23,8 +23,8 @@ test_job:
 
   stage: test
   script:
-    - python --version # Проверка, что python доступен
-    - pip install -r requirements.txt # Установка зависимостей
+    - python --version
+    - pip install -r requirements.txt
     - echo "Spouštím testy..."
     - pytest tests/ # Spustí všechny testy v adresáři tests
     - echo "Testy dokončeny."
