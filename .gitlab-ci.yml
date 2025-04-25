@@ -1,5 +1,6 @@
 image: python:3.10 # Nebo jiná verze Pythonu, kterou preferujete
 
+
 stages:
   - test
 
@@ -19,8 +20,11 @@ before_script:
   - pip install -r requirements.txt
 
 test_job:
+
   stage: test
   script:
+    - python --version # Проверка, что python доступен
+    - pip install -r requirements.txt # Установка зависимостей
     - echo "Spouštím testy..."
     - pytest tests/ # Spustí všechny testy v adresáři tests
     - echo "Testy dokončeny."
