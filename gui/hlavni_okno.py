@@ -7,10 +7,10 @@ from PyQt6.QtWidgets import (
 from PyQt6.QtCore import QDate, Qt
 from PyQt6.QtGui import QFont
 
-from currency_analyzer.core.api_klient import ApiKlient
-from currency_analyzer.core.spravce_databaze import SpravceDatabaze
-from currency_analyzer.core.zpracovatel_dat import ZpracovatelDat
-from currency_analyzer.gui.widget_grafu import WidgetGrafu
+from core.api_klient import ApiKlient
+from core.spravce_databaze import SpravceDatabaze
+from core.zpracovatel_dat import ZpracovatelDat
+from gui.widget_grafu import WidgetGrafu
 import pandas as pd
 from datetime import datetime, timedelta
 
