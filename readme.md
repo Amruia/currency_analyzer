@@ -15,7 +15,7 @@ Aplikace využívá veřejné API služby [Frankfurter](https://api.frankfurter.
 
 ## Použité technologie
 
-- **Python 3.8+**
+- **Python 3.10+**
 - **PyQt5**: Uživatelské rozhraní
 - **requests**: HTTP klient pro komunikaci s API
 - **sqlite3**: Lokální databáze
